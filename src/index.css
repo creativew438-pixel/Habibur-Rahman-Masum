@@ -22,26 +22,101 @@
   }
 }
 
-/* Vivid Parrot Green / Electric Lime Glowing Profile Frame */
+/* Profile Photo Matched Petrol-Teal & Ice-Cyan Glowing Frame */
 @keyframes parrotPulseGlow {
   0%, 100% {
     box-shadow:
-      0 0 18px rgba(163, 230, 53, 0.55),
-      0 0 38px rgba(132, 204, 22, 0.32),
-      inset 0 0 14px rgba(190, 242, 100, 0.25);
-    border-color: rgba(163, 230, 53, 0.9);
+      0 0 20px rgba(34, 211, 238, 0.55),
+      0 0 42px rgba(60, 128, 145, 0.42),
+      inset 0 0 16px rgba(103, 232, 249, 0.25);
+    border-color: rgba(34, 211, 238, 0.9);
   }
   50% {
     box-shadow:
-      0 0 28px rgba(190, 242, 100, 0.8),
-      0 0 56px rgba(163, 230, 53, 0.48),
-      inset 0 0 22px rgba(190, 242, 100, 0.35);
-    border-color: rgba(217, 249, 157, 1);
+      0 0 30px rgba(103, 232, 249, 0.8),
+      0 0 60px rgba(56, 189, 248, 0.5),
+      inset 0 0 24px rgba(165, 243, 252, 0.35);
+    border-color: rgba(165, 243, 252, 1);
   }
 }
 
 .profile-parrot-glow {
   animation: parrotPulseGlow 3.2s ease-in-out infinite;
+}
+
+/* Colorized Main Name ("Habibur Rahman Masum") matched to Profile Photo Studio Tone */
+@keyframes nameColorFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.name-colorized-dark {
+  background-image: linear-gradient(
+    90deg,
+    #a5f3fc 0%,
+    #22d3ee 28%,
+    #38bdf8 55%,
+    #5eead4 80%,
+    #67e8f9 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 22px rgba(34, 211, 238, 0.32));
+  animation: nameColorFlow 6s ease-in-out infinite;
+}
+
+.name-colorized-light {
+  background-image: linear-gradient(
+    90deg,
+    #144652 0%,
+    #0e7490 35%,
+    #0284c7 70%,
+    #144652 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: nameColorFlow 6s ease-in-out infinite;
+}
+
+/* Animated Orbiting Ellipse Rings around Profile Picture */
+@keyframes ellipseOrbitCw {
+  0% {
+    transform: rotate(0deg) scaleX(1.08) scaleY(0.93);
+  }
+  50% {
+    transform: rotate(180deg) scaleX(0.94) scaleY(1.07);
+  }
+  100% {
+    transform: rotate(360deg) scaleX(1.08) scaleY(0.93);
+  }
+}
+
+@keyframes ellipseOrbitCcw {
+  0% {
+    transform: rotate(360deg) scaleX(0.93) scaleY(1.08);
+  }
+  50% {
+    transform: rotate(180deg) scaleX(1.07) scaleY(0.94);
+  }
+  100% {
+    transform: rotate(0deg) scaleX(0.93) scaleY(1.08);
+  }
+}
+
+.ellipse-ring-1 {
+  animation: ellipseOrbitCw 11s linear infinite;
+}
+
+.ellipse-ring-2 {
+  animation: ellipseOrbitCcw 15s linear infinite;
 }
 
 @keyframes marqueeScroll {
@@ -65,6 +140,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .profile-parrot-glow,
+  .ellipse-ring-1,
+  .ellipse-ring-2,
   .animate-marquee {
     animation: none !important;
   }

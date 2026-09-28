@@ -62,47 +62,47 @@ export const CursorGreenFollower: React.FC<CursorGreenFollowerProps> = ({ isDark
 
   return (
     <div className="pointer-events-none fixed inset-0 z-50 hidden lg:block overflow-hidden" aria-hidden="true">
-      {/* Soft Parrot Green Ambient Spotlight following cursor */}
+      {/* Soft Petrol-Cyan Ambient Spotlight following cursor */}
       <div
         className="fixed rounded-full transition-opacity duration-300"
         style={{
-          width: '440px',
-          height: '440px',
-          transform: `translate3d(${ringPosition.x - 220}px, ${ringPosition.y - 220}px, 0)`,
+          width: '460px',
+          height: '460px',
+          transform: `translate3d(${ringPosition.x - 230}px, ${ringPosition.y - 230}px, 0)`,
           background: isDark
-            ? 'radial-gradient(circle, rgba(163, 230, 53, 0.13) 0%, rgba(132, 204, 22, 0.05) 42%, transparent 70%)'
-            : 'radial-gradient(circle, rgba(132, 204, 22, 0.12) 0%, rgba(163, 230, 53, 0.04) 42%, transparent 70%)'
+            ? 'radial-gradient(circle, rgba(60, 128, 145, 0.22) 0%, rgba(34, 211, 238, 0.08) 42%, transparent 70%)'
+            : 'radial-gradient(circle, rgba(56, 189, 248, 0.14) 0%, rgba(60, 128, 145, 0.05) 42%, transparent 70%)'
         }}
       />
 
-      {/* Outer Parrot Green Tracking Ring */}
+      {/* Outer Cyan-Teal Tracking Ring */}
       <div
         className="fixed rounded-full border transition-transform duration-150 ease-out"
         style={{
           width: isHoveringInteractive ? '44px' : '28px',
           height: isHoveringInteractive ? '44px' : '28px',
           borderColor: isHoveringInteractive
-            ? 'rgba(190, 242, 100, 0.9)'
-            : 'rgba(163, 230, 53, 0.55)',
+            ? 'rgba(103, 232, 249, 0.9)'
+            : 'rgba(34, 211, 238, 0.55)',
           backgroundColor: isHoveringInteractive
-            ? 'rgba(163, 230, 53, 0.1)'
+            ? 'rgba(34, 211, 238, 0.1)'
             : 'transparent',
           boxShadow: isHoveringInteractive
-            ? '0 0 20px rgba(163, 230, 53, 0.45)'
-            : '0 0 10px rgba(163, 230, 53, 0.25)',
+            ? '0 0 20px rgba(34, 211, 238, 0.45)'
+            : '0 0 10px rgba(60, 128, 145, 0.35)',
           transform: `translate3d(${ringPosition.x - (isHoveringInteractive ? 22 : 14)}px, ${
             ringPosition.y - (isHoveringInteractive ? 22 : 14)
           }px, 0) scale(${isClicking ? 0.85 : 1})`
         }}
       />
 
-      {/* Crisp Neon Parrot Dot */}
+      {/* Crisp Neon Cyan Dot */}
       <div
-        className="fixed rounded-full bg-lime-400"
+        className="fixed rounded-full bg-cyan-300"
         style={{
           width: '7px',
           height: '7px',
-          boxShadow: '0 0 12px rgba(190, 242, 100, 0.95)',
+          boxShadow: '0 0 12px rgba(103, 232, 249, 0.95)',
           transform: `translate3d(${position.x - 3.5}px, ${position.y - 3.5}px, 0)`
         }}
       />

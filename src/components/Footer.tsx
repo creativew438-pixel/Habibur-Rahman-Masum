@@ -11,13 +11,13 @@ export const Footer: React.FC<FooterProps> = ({ isDark, onOpenHtmlModal }) => {
     <footer
       className={`py-10 border-t text-xs ${
         isDark
-          ? 'border-white/[0.08] bg-[#050708] text-slate-400'
+          ? 'border-cyan-300/[0.09] bg-[#040b0e] text-slate-400'
           : 'border-slate-200 bg-slate-100 text-slate-600'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="text-center sm:text-left">
-          <span className={`font-display font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>
+          <span className={`font-display font-bold ${isDark ? 'name-colorized-dark' : 'name-colorized-light'}`}>
             {PROFILE_DATA.name}
           </span>
           <span className="mx-2" aria-hidden="true">
@@ -27,20 +27,20 @@ export const Footer: React.FC<FooterProps> = ({ isDark, onOpenHtmlModal }) => {
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-5">
-          <a href="#videos" className="hover:text-lime-400 transition-colors">
+          <a href="#videos" className="hover:text-cyan-400 transition-colors">
             Video Edits (16:9)
           </a>
-          <a href="#reels" className="hover:text-lime-400 transition-colors">
+          <a href="#reels" className="hover:text-cyan-400 transition-colors">
             Shorts & Reels (9:16)
           </a>
-          <a href="#graphics" className="hover:text-lime-400 transition-colors">
+          <a href="#graphics" className="hover:text-cyan-400 transition-colors">
             Graphic Design
           </a>
           <a
             href={PROFILE_DATA.socials.youtube}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-lime-400 transition-colors"
+            className="hover:text-cyan-400 transition-colors"
           >
             YouTube
           </a>
@@ -48,7 +48,7 @@ export const Footer: React.FC<FooterProps> = ({ isDark, onOpenHtmlModal }) => {
             href={PROFILE_DATA.socials.behance}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-lime-400 transition-colors"
+            className="hover:text-cyan-400 transition-colors"
           >
             Behance
           </a>
@@ -56,14 +56,14 @@ export const Footer: React.FC<FooterProps> = ({ isDark, onOpenHtmlModal }) => {
             href={PROFILE_DATA.socials.facebook}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-lime-400 transition-colors"
+            className="hover:text-cyan-400 transition-colors"
           >
             Facebook
           </a>
           <button
             type="button"
             onClick={onOpenHtmlModal}
-            className="text-lime-400 hover:underline cursor-pointer"
+            className="text-cyan-400 hover:underline cursor-pointer"
           >
             Single-File HTML
           </button>

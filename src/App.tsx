@@ -15,6 +15,7 @@ import { GraphicManagerModal } from './components/GraphicManagerModal';
 import { VideoManagerModal } from './components/VideoManagerModal';
 import { WhatsAppConfigModal } from './components/WhatsAppConfigModal';
 import { HtmlCodeModal } from './components/HtmlCodeModal';
+import { ProfilePhotoModal } from './components/ProfilePhotoModal';
 import {
   getStoredFeaturedVideo,
   saveStoredFeaturedVideo,
@@ -27,13 +28,22 @@ import {
 import {
   getStoredGraphics,
   saveStoredGraphics,
-  resetStoredGraphics
+  resetStoredGraphics,
+  getProfilePhotoConfig,
+  saveProfilePhotoConfig,
+  clearProfilePhotoConfig,
+  ProfilePhotoConfig
 } from './utils/graphicManager';
 import { VideoProject, GraphicProject } from './types';
 
 export default function App() {
   // Default theme on load is Dark Mode as requested
   const [isDark, setIsDark] = useState<boolean>(true);
+
+  // Profile Photo Config state (No modified/AI photo — user uploads their exact photo)
+  const [profilePhoto, setProfilePhoto] = useState<ProfilePhotoConfig>(() =>
+    getProfilePhotoConfig()
+  );
 
   // Videos (16:9 Widescreen) & Reels (9:16 Vertical) state
   const [featuredVideo, setFeaturedVideo] = useState<VideoProject>(() =>
@@ -53,6 +63,7 @@ export default function App() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   // Modals state
+  const [isProfilePhotoModalOpen, setIsProfilePhotoModalOpen] = useState(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [isGraphicModalOpen, setIsGraphicModalOpen] = useState(false);
   const [isWhatsAppModalOpen, setIsWhatsAppModalOpen] = useState(false);
@@ -67,6 +78,16 @@ export default function App() {
       root.classList.remove('dark');
     }
   }, [isDark]);
+
+  const handleUpdateProfilePhoto = (newConfig: ProfilePhotoConfig) => {
+    setProfilePhoto(newConfig);
+    saveProfilePhotoConfig(newConfig);
+  };
+
+  const handleClearProfilePhoto = () => {
+    const cleared = clearProfilePhotoConfig();
+    setProfilePhoto(cleared);
+  };
 
   const handleUpdateFeatured = (video: VideoProject) => {
     setFeaturedVideo(video);
@@ -104,9 +125,17 @@ export default function App() {
     <div
       className={`min-h-screen transition-colors duration-300 ${
         isDark
-          ? 'bg-[#060809] text-[#f4f6f0]'
-          : 'bg-[#f5f6f2] text-slate-900'
+          ? 'bg-[#061116] text-[#eef6f8]'
+          : 'bg-[#f0f6f8] text-slate-900'
       }`}
+      style={
+        isDark
+          ? {
+              backgroundImage:
+                'radial-gradient(circle at 18% 8%, rgba(20, 70, 82, 0.48) 0%, transparent 45%), radial-gradient(circle at 82% 22%, rgba(60, 128, 145, 0.25) 0%, transparent 50%)'
+            }
+          : undefined
+      }
     >
       {/* Interactive Bright Parrot-Green Cursor Follower */}
       <CursorGreenFollower isDark={isDark} />
@@ -124,6 +153,9 @@ export default function App() {
         <HeroSection
           isDark={isDark}
           featuredVideo={featuredVideo}
+          profilePhoto={profilePhoto}
+          onUpdateProfilePhoto={handleUpdateProfilePhoto}
+          onOpenProfilePhotoModal={() => setIsProfilePhotoModalOpen(true)}
           onOpenWhatsAppModal={() => setIsWhatsAppModalOpen(true)}
           onOpenVideoModal={() => setIsVideoModalOpen(true)}
         />
@@ -173,6 +205,14 @@ export default function App() {
       />
 
       {/* Interactive Modals */}
+      <ProfilePhotoModal
+        isOpen={isProfilePhotoModalOpen}
+        onClose={() => setIsProfilePhotoModalOpen(false)}
+        config={profilePhoto}
+        onSaveConfig={handleUpdateProfilePhoto}
+        onClearPhoto={handleClearProfilePhoto}
+      />
+
       <ImageLightbox
         items={graphics}
         currentIndex={lightboxIndex}

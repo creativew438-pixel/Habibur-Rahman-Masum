@@ -1,5 +1,4 @@
 import { VideoProject, GraphicProject, ServiceItem, ProcessStep, FaqItem } from '../types';
-import avatarFallback from '../assets/images/avatar_habibur_editor_1790552881886.jpg';
 import airBadrFallback from '../assets/images/poster_air_badr_design_1790552895134.jpg';
 import nikeShoesFallback from '../assets/images/poster_nike_shoes_design_1790552906323.jpg';
 
@@ -10,9 +9,7 @@ export const PROFILE_DATA = {
   shortGreeting:
     "Hi, I'm Habibur Rahman Masum — a dedicated Video Editor & Graphic Designer focused on sharp pacing, clean motion graphics, immersive sound design, and high-impact poster visuals.",
   bio: 'I am a passionate video editor dedicated to the art of visual storytelling. Over the past several months, I have immersed myself in learning the ins and outs of editing—practicing daily, refining my pacing, and perfecting my sound design. While I don\'t claim decades of industry experience, I bring fresh creativity, high-energy dedication, and a modern aesthetic to every frame. Let\'s create something memorable together.',
-  avatarSrc: 'profile.jpg',
-  avatarPostimgUrl: 'https://postimg.cc/DJpBQJbB',
-  avatarFallbackSrc: avatarFallback,
+  avatarSrc: '',
   availability: 'Available for Projects',
   location: 'Remote · Worldwide Delivery',
   email: 'habiburrahmanmasum132@gmail.com',
@@ -174,7 +171,7 @@ export const REEL_PROJECTS: VideoProject[] = [
 export const GRAPHIC_PROJECTS: GraphicProject[] = [
   {
     id: 1,
-    src: 'https://postimg.cc/JDF5Dffw',
+    src: 'https://i.postimg.cc/KjGqVFQY/airbadr.jpg',
     localFilename: 'graphic1.jpg',
     fallbackSrc: airBadrFallback,
     title: 'Air Badr — Commercial Poster Design',
@@ -185,7 +182,7 @@ export const GRAPHIC_PROJECTS: GraphicProject[] = [
   },
   {
     id: 2,
-    src: 'https://postimg.cc/YGPzG55w',
+    src: 'https://i.postimg.cc/zvztM5p3/Nike-Shoes.jpg',
     localFilename: 'graphic2.jpg',
     fallbackSrc: nikeShoesFallback,
     title: 'Nike Shoes — Dynamic Brand Visual',

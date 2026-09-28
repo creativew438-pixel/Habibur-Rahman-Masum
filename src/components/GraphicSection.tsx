@@ -19,7 +19,7 @@ export const GraphicSection: React.FC<GraphicSectionProps> = ({
     <section
       id="graphics"
       className={`py-16 sm:py-20 border-t ${
-        isDark ? 'border-white/[0.07]' : 'border-slate-200/90'
+        isDark ? 'border-cyan-300/[0.09]' : 'border-slate-200/90'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
@@ -28,7 +28,7 @@ export const GraphicSection: React.FC<GraphicSectionProps> = ({
           <div className="space-y-2">
             <div
               className={`flex items-center gap-2 text-xs font-mono-tabular ${
-                isDark ? 'text-lime-400' : 'text-lime-700 font-semibold'
+                isDark ? 'text-cyan-400' : 'text-cyan-700 font-semibold'
               }`}
             >
               <span>03. Visual Design & Branding</span>
@@ -53,7 +53,7 @@ export const GraphicSection: React.FC<GraphicSectionProps> = ({
           <button
             type="button"
             onClick={onOpenGraphicManager}
-            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-lime-400 text-slate-950 hover:bg-lime-300 transition-colors whitespace-nowrap self-start sm:self-auto shadow-sm cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-cyan-400 text-slate-950 hover:bg-cyan-300 transition-colors whitespace-nowrap self-start sm:self-auto shadow-sm cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>Add / Upload Design</span>
@@ -73,8 +73,8 @@ export const GraphicSection: React.FC<GraphicSectionProps> = ({
               }}
               className={`group rounded-2xl overflow-hidden border transition-all duration-200 cursor-pointer flex flex-col ${
                 isDark
-                  ? 'bg-[#0b0f10] border-white/[0.08] hover:border-lime-400/60'
-                  : 'bg-white border-slate-200/90 hover:border-lime-600/50 shadow-sm'
+                  ? 'bg-[#08151b]/90 border-cyan-300/[0.1] hover:border-cyan-400/60'
+                  : 'bg-white border-slate-200/90 hover:border-cyan-600/50 shadow-sm'
               }`}
             >
               {/* 3:4 Poster Container */}
@@ -95,12 +95,12 @@ export const GraphicSection: React.FC<GraphicSectionProps> = ({
                 {/* Hover Scrim & Lightbox Trigger */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-75 group-hover:opacity-95 transition-opacity" />
 
-                <div className="absolute top-3 right-3 p-2.5 rounded-xl bg-black/70 text-lime-300 border border-lime-400/30 opacity-90 group-hover:scale-105 transition-transform">
+                <div className="absolute top-3 right-3 p-2.5 rounded-xl bg-black/70 text-cyan-300 border border-cyan-400/30 opacity-90 group-hover:scale-105 transition-transform">
                   <Expand className="w-4 h-4" />
                 </div>
 
                 <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs font-mono-tabular text-white">
-                  <span className="text-lime-300">Click to Open Lightbox</span>
+                  <span className="text-cyan-300">Click to Open Lightbox</span>
                   <span>0{index + 1}</span>
                 </div>
               </div>
@@ -110,13 +110,13 @@ export const GraphicSection: React.FC<GraphicSectionProps> = ({
                 <div className="space-y-1.5">
                   <div
                     className={`flex items-center gap-2 text-xs font-mono-tabular ${
-                      isDark ? 'text-lime-400' : 'text-lime-700 font-medium'
+                      isDark ? 'text-cyan-400' : 'text-cyan-700 font-medium'
                     }`}
                   >
                     <span>{item.category}</span>
                   </div>
 
-                  <h3 className="font-display text-lg font-bold group-hover:text-lime-400 transition-colors">
+                  <h3 className="font-display text-lg font-bold group-hover:text-cyan-400 transition-colors">
                     {item.title}
                   </h3>
 
@@ -127,7 +127,7 @@ export const GraphicSection: React.FC<GraphicSectionProps> = ({
 
                 <div
                   className={`pt-3 border-t text-xs ${
-                    isDark ? 'border-white/[0.06] text-slate-400' : 'border-slate-100 text-slate-500'
+                    isDark ? 'border-cyan-300/[0.08] text-slate-400' : 'border-slate-100 text-slate-500'
                   }`}
                 >
                   {(item.tools || ['Adobe Photoshop', 'Brand Design']).join(' · ')}
@@ -142,13 +142,13 @@ export const GraphicSection: React.FC<GraphicSectionProps> = ({
             onClick={onOpenGraphicManager}
             className={`group rounded-2xl border-2 border-dashed p-8 flex flex-col items-center justify-center text-center transition-all min-h-[380px] cursor-pointer ${
               isDark
-                ? 'border-white/15 bg-white/[0.015] hover:border-lime-400/60 hover:bg-lime-400/[0.04]'
-                : 'border-slate-300 bg-slate-50/70 hover:border-lime-600 hover:bg-lime-50/40'
+                ? 'border-cyan-300/20 bg-[#08151b]/45 hover:border-cyan-400/60 hover:bg-cyan-400/[0.05]'
+                : 'border-slate-300 bg-slate-50/70 hover:border-cyan-600 hover:bg-cyan-50/40'
             }`}
           >
             <div
               className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 ${
-                isDark ? 'bg-lime-400/15 text-lime-300' : 'bg-lime-100 text-lime-700'
+                isDark ? 'bg-cyan-400/15 text-cyan-300' : 'bg-cyan-100 text-cyan-700'
               }`}
             >
               <Upload className="w-6 h-6" />
@@ -160,7 +160,7 @@ export const GraphicSection: React.FC<GraphicSectionProps> = ({
             <p className={`text-xs sm:text-sm max-w-xs mb-4 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
               Select any poster, thumbnail, or banner image directly from your computer or phone folder to add it to your gallery.
             </p>
-            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-lime-400 text-slate-950">
+            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-cyan-400 text-slate-950">
               <Plus className="w-3.5 h-3.5" />
               <span>Choose Image File</span>
             </span>

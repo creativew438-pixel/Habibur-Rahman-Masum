@@ -13,14 +13,14 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ isDark }) => {
     <section
       id="faq"
       className={`py-16 sm:py-20 border-t ${
-        isDark ? 'border-white/[0.07] bg-[#080b0c]/40' : 'border-slate-200/90 bg-slate-100/50'
+        isDark ? 'border-cyan-300/[0.09] bg-[#071318]/50' : 'border-slate-200/90 bg-slate-100/50'
       }`}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="space-y-2 text-center">
           <p
             className={`text-xs font-mono-tabular ${
-              isDark ? 'text-lime-400' : 'text-lime-700 font-semibold'
+              isDark ? 'text-cyan-400' : 'text-cyan-700 font-semibold'
             }`}
           >
             06. Frequently Asked Questions
@@ -38,7 +38,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ isDark }) => {
                 key={item.question}
                 className={`rounded-2xl border transition-colors ${
                   isDark
-                    ? 'bg-[#0b0f10] border-white/[0.08]'
+                    ? 'bg-[#08151b]/90 border-cyan-300/[0.1]'
                     : 'bg-white border-slate-200/90 shadow-sm'
                 }`}
               >
@@ -51,7 +51,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ isDark }) => {
                     {item.question}
                   </span>
                   <ChevronDown
-                    className={`w-4 h-4 shrink-0 text-lime-400 transition-transform duration-200 ${
+                    className={`w-4 h-4 shrink-0 text-cyan-400 transition-transform duration-200 ${
                       isOpen ? 'rotate-180' : ''
                     }`}
                   />
@@ -59,7 +59,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ isDark }) => {
                 {isOpen && (
                   <div
                     className={`px-6 pb-5 pt-1 text-xs sm:text-sm leading-relaxed border-t ${
-                      isDark ? 'border-white/[0.05] text-slate-300' : 'border-slate-100 text-slate-600'
+                      isDark ? 'border-cyan-300/[0.08] text-slate-300' : 'border-slate-100 text-slate-600'
                     }`}
                   >
                     {item.answer}

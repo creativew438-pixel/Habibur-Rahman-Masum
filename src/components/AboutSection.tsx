@@ -17,7 +17,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isDark }) => {
     <section
       id="about"
       className={`py-16 sm:py-20 border-t ${
-        isDark ? 'border-white/[0.07]' : 'border-slate-200/90'
+        isDark ? 'border-cyan-300/[0.09]' : 'border-slate-200/90'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +27,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isDark }) => {
             <div className="space-y-2">
               <div
                 className={`flex items-center gap-2 text-xs font-mono-tabular ${
-                  isDark ? 'text-lime-400' : 'text-lime-700 font-semibold'
+                  isDark ? 'text-cyan-400' : 'text-cyan-700 font-semibold'
                 }`}
               >
                 <span>05. About Me</span>
@@ -47,9 +47,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isDark }) => {
 
             {/* Exact Honest Bio from User Instructions */}
             <blockquote
-              className={`rounded-2xl p-6 sm:p-8 border-l-4 border-lime-400 text-base sm:text-lg leading-relaxed ${
+              className={`rounded-2xl p-6 sm:p-8 border-l-4 border-cyan-400 text-base sm:text-lg leading-relaxed ${
                 isDark
-                  ? 'bg-[#0b0f10] text-slate-200 border-y border-r border-y-white/[0.07] border-r-white/[0.07]'
+                  ? 'bg-[#08151b]/90 text-slate-200 border-y border-r border-y-cyan-300/[0.1] border-r-cyan-300/[0.1]'
                   : 'bg-white text-slate-800 border-y border-r border-y-slate-200 border-r-slate-200 shadow-sm'
               }`}
             >
@@ -73,12 +73,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isDark }) => {
                   key={tool.name}
                   className={`rounded-xl p-4 border transition-colors ${
                     isDark
-                      ? 'bg-[#0b0f10] border-white/[0.08] hover:border-lime-400/40'
+                      ? 'bg-[#08151b]/90 border-cyan-300/[0.1] hover:border-cyan-400/45'
                       : 'bg-white border-slate-200/90 shadow-sm'
                   }`}
                 >
                   <div className="flex items-center justify-between text-xs font-mono-tabular mb-1">
-                    <span className={isDark ? 'text-lime-400 font-semibold' : 'text-lime-700 font-semibold'}>
+                    <span className={isDark ? 'text-cyan-400 font-semibold' : 'text-cyan-700 font-semibold'}>
                       0{idx + 1}. {tool.name}
                     </span>
                     <span className={isDark ? 'text-slate-400' : 'text-slate-500'}>Daily Practice</span>

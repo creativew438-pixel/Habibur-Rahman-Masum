@@ -19,7 +19,7 @@ export const ReelsSection: React.FC<ReelsSectionProps> = ({
     <section
       id="reels"
       className={`py-16 sm:py-20 border-t ${
-        isDark ? 'border-white/[0.07] bg-[#080b0c]/60' : 'border-slate-200/90 bg-slate-100/60'
+        isDark ? 'border-cyan-300/[0.09] bg-[#071318]/70' : 'border-slate-200/90 bg-slate-100/60'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
@@ -28,7 +28,7 @@ export const ReelsSection: React.FC<ReelsSectionProps> = ({
           <div className="space-y-2">
             <div
               className={`flex items-center gap-2 text-xs font-mono-tabular ${
-                isDark ? 'text-lime-400' : 'text-lime-700 font-semibold'
+                isDark ? 'text-cyan-400' : 'text-cyan-700 font-semibold'
               }`}
             >
               <Smartphone className="w-3.5 h-3.5" />
@@ -56,8 +56,8 @@ export const ReelsSection: React.FC<ReelsSectionProps> = ({
             onClick={onOpenVideoModal}
             className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold border transition-colors whitespace-nowrap self-start sm:self-auto cursor-pointer ${
               isDark
-                ? 'border-lime-400/40 bg-lime-400/10 text-lime-300 hover:bg-lime-400/20'
-                : 'border-lime-600/40 bg-lime-50 text-lime-800 hover:bg-lime-100'
+                ? 'border-cyan-400/40 bg-cyan-400/10 text-cyan-300 hover:bg-cyan-400/20'
+                : 'border-cyan-600/40 bg-cyan-50 text-cyan-800 hover:bg-cyan-100'
             }`}
           >
             <Plus className="w-3.5 h-3.5" />
@@ -75,8 +75,8 @@ export const ReelsSection: React.FC<ReelsSectionProps> = ({
                 key={reel.id}
                 className={`group rounded-2xl overflow-hidden border transition-all duration-200 flex flex-col ${
                   isDark
-                    ? 'bg-[#0b0f10] border-white/[0.08] hover:border-lime-400/60 shadow-lg'
-                    : 'bg-white border-slate-200/90 hover:border-lime-600/50 shadow-sm'
+                    ? 'bg-[#08151b]/90 border-cyan-300/[0.1] hover:border-cyan-400/60 shadow-lg'
+                    : 'bg-white border-slate-200/90 hover:border-cyan-600/50 shadow-sm'
                 }`}
               >
                 {/* Vertical 9:16 Smartphone Frame */}
@@ -121,16 +121,16 @@ export const ReelsSection: React.FC<ReelsSectionProps> = ({
                       {/* Measured Scrim Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/25 transition-opacity group-hover:opacity-90" />
 
-                      {/* Center Parrot-Green Play Button */}
+                      {/* Center Cyan Play Button */}
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-14 h-14 rounded-full bg-lime-400 text-slate-950 flex items-center justify-center shadow-[0_0_28px_rgba(163,230,53,0.75)] transition-transform duration-200 group-hover:scale-110">
+                        <div className="w-14 h-14 rounded-full bg-cyan-400 text-slate-950 flex items-center justify-center shadow-[0_0_28px_rgba(34,211,238,0.75)] transition-transform duration-200 group-hover:scale-110">
                           <Play className="w-6 h-6 fill-slate-950 ml-0.5" />
                         </div>
                       </div>
 
                       {/* Bottom Overlay Info inside Vertical Frame */}
                       <div className="absolute bottom-0 inset-x-0 p-4 space-y-1 text-white">
-                        <div className="flex items-center gap-1.5 text-[11px] font-mono-tabular text-lime-300">
+                        <div className="flex items-center gap-1.5 text-[11px] font-mono-tabular text-cyan-300">
                           <span>0{index + 1}</span>
                           <span aria-hidden="true">·</span>
                           <span>{reel.category}</span>
@@ -156,7 +156,7 @@ export const ReelsSection: React.FC<ReelsSectionProps> = ({
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`inline-flex items-center gap-1 font-semibold shrink-0 transition-colors ${
-                      isDark ? 'text-lime-300 hover:text-lime-200' : 'text-lime-700 hover:text-lime-800'
+                      isDark ? 'text-cyan-300 hover:text-cyan-200' : 'text-cyan-700 hover:text-cyan-800'
                     }`}
                   >
                     <span>Watch Short</span>

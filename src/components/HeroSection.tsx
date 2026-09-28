@@ -5,17 +5,22 @@ import {
   Settings2,
   ExternalLink,
   Video,
-  Camera,
   ArrowDownRight
 } from 'lucide-react';
 import { PROFILE_DATA } from '../data/portfolioData';
 import { VideoProject } from '../types';
 import { buildWhatsAppUrl, isCustomWhatsAppConfigured } from '../utils/whatsappConfig';
-import { getCustomAvatar, saveCustomAvatar } from '../utils/graphicManager';
+import {
+  ProfilePhotoConfig,
+  processUploadedImageFile
+} from '../utils/graphicManager';
 
 interface HeroSectionProps {
   isDark: boolean;
   featuredVideo: VideoProject;
+  profilePhoto: ProfilePhotoConfig;
+  onUpdateProfilePhoto: (newConfig: ProfilePhotoConfig) => void;
+  onOpenProfilePhotoModal: () => void;
   onOpenWhatsAppModal: () => void;
   onOpenVideoModal: () => void;
 }
@@ -23,32 +28,29 @@ interface HeroSectionProps {
 export const HeroSection: React.FC<HeroSectionProps> = ({
   isDark,
   featuredVideo,
+  profilePhoto,
+  onUpdateProfilePhoto,
+  onOpenProfilePhotoModal,
   onOpenWhatsAppModal,
   onOpenVideoModal
 }) => {
   const [isPlayingFeatured, setIsPlayingFeatured] = useState(false);
-  const [customAvatar, setCustomAvatar] = useState<string | null>(() => getCustomAvatar());
-  const [imgSrc, setImgSrc] = useState<string>(customAvatar || PROFILE_DATA.avatarSrc);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [imgLoadError, setImgLoadError] = useState(false);
+  const quickFileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleAvatarError = () => {
-    if (imgSrc !== PROFILE_DATA.avatarFallbackSrc) {
-      setImgSrc(PROFILE_DATA.avatarFallbackSrc);
-    }
-  };
-
-  const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleQuickFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (typeof reader.result === 'string') {
-        saveCustomAvatar(reader.result);
-        setCustomAvatar(reader.result);
-        setImgSrc(reader.result);
-      }
-    };
-    reader.readAsDataURL(file);
+    try {
+      const optimizedDataUrl = await processUploadedImageFile(file, 1000);
+      setImgLoadError(false);
+      onUpdateProfilePhoto({
+        ...profilePhoto,
+        src: optimizedDataUrl
+      });
+    } catch {
+      onOpenProfilePhotoModal();
+    }
   };
 
   const scrollToFeaturedAndPlay = () => {
@@ -60,14 +62,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   };
 
   const whatsappConfigured = isCustomWhatsAppConfigured();
+  const hasValidPhoto = Boolean(profilePhoto.src && !imgLoadError);
 
   return (
     <section id="top" className="relative pt-8 sm:pt-12 pb-16 sm:pb-20 overflow-hidden">
-      {/* Subtle Parrot Green Ambient Glow */}
+      {/* Studio Petrol-Teal & Cyan Ambient Glow matching profile.jpg backdrop (#144652 / #3c8091) */}
       <div
-        className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 w-[760px] h-[340px] rounded-full blur-[130px] opacity-25"
+        className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 w-[820px] h-[380px] rounded-full blur-[135px] opacity-35"
         style={{
-          background: 'radial-gradient(circle, rgba(163, 230, 53, 0.45) 0%, rgba(132, 204, 22, 0.1) 60%, transparent 100%)'
+          background:
+            'radial-gradient(circle, rgba(60, 128, 145, 0.65) 0%, rgba(20, 70, 82, 0.35) 55%, transparent 100%)'
         }}
         aria-hidden="true"
       />
@@ -77,57 +81,90 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div
           className={`relative rounded-2xl p-6 sm:p-8 lg:p-10 border transition-colors ${
             isDark
-              ? 'bg-[#0b0f10]/90 border-white/[0.08]'
+              ? 'bg-gradient-to-br from-[#08151b]/95 via-[#0a1b22]/90 to-[#071116]/95 border-cyan-400/[0.16] shadow-[0_20px_60px_-20px_rgba(20,70,82,0.55)]'
               : 'bg-white border-slate-200/90 shadow-sm'
           }`}
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-            {/* Left Column: Profile Photo with Glowing Neon Parrot-Green Border */}
-            <div className="lg:col-span-4 flex flex-col items-center lg:items-start">
-              <div className="relative group">
-                {/* Ambient Parrot Green Halo behind Avatar */}
+            {/* Left Column: Elliptical Profile Photo with Animated Orbiting Petrol-Cyan Ellipse Rings */}
+            <div className="lg:col-span-4 flex flex-col items-center">
+              <div className="relative group p-4 sm:p-5 flex items-center justify-center">
+                {/* Soft Petrol-Cyan Studio Aura matching profile photo background */}
                 <div
-                  className="absolute -inset-2 rounded-2xl bg-gradient-to-tr from-lime-400/40 via-lime-300/25 to-emerald-400/30 blur-xl opacity-80 group-hover:opacity-100 transition-opacity"
+                  className="pointer-events-none absolute inset-1 rounded-full bg-gradient-to-tr from-[#144652]/80 via-[#3c8091]/55 to-cyan-400/40 blur-2xl opacity-90 group-hover:opacity-100 transition-opacity duration-500"
                   aria-hidden="true"
                 />
 
-                {/* Neon Parrot-Green Glowing Frame */}
-                <div className="relative w-52 h-52 sm:w-60 sm:h-60 rounded-2xl overflow-hidden border-2 border-lime-400 profile-parrot-glow bg-slate-900">
-                  <img
-                    src={imgSrc}
-                    alt={PROFILE_DATA.name}
-                    onError={handleAvatarError}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                  />
+                {/* Animated Outer Ellipse Ring 1 (Clockwise Morphing Ellipse + Glowing Cyan Node) */}
+                <div
+                  className="pointer-events-none absolute -inset-1 sm:-inset-2 rounded-full border border-cyan-400/50 ellipse-ring-1 transition-transform duration-500"
+                  style={{
+                    boxShadow: '0 0 24px rgba(60, 128, 145, 0.35)'
+                  }}
+                  aria-hidden="true"
+                >
+                  <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-cyan-300 shadow-[0_0_14px_#22d3ee]" />
+                </div>
 
-                  {/* Quick button to let user change/upload their local profile.jpg anytime */}
-                  <button
-                    type="button"
-                    onClick={() => fileInputRef.current?.click()}
-                    title="Upload your profile.jpg photo"
-                    className="absolute bottom-2.5 right-2.5 inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[11px] font-medium bg-slate-950/85 text-lime-300 border border-lime-400/40 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity whitespace-nowrap"
-                  >
-                    <Camera className="w-3.5 h-3.5" />
-                    <span>Change Photo</span>
-                  </button>
+                {/* Animated Outer Ellipse Ring 2 (Counter-Clockwise Dashed Tilted Ellipse + Sky Node) */}
+                <div
+                  className="pointer-events-none absolute -inset-3 sm:-inset-4 rounded-full border border-dashed border-sky-300/40 ellipse-ring-2 transition-transform duration-500"
+                  aria-hidden="true"
+                >
+                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-sky-300 shadow-[0_0_12px_#38bdf8]" />
+                </div>
+
+                {/* Inner Neon Petrol-Cyan Glowing Ellipse/Circular Frame */}
+                <div
+                  onDoubleClick={onOpenProfilePhotoModal}
+                  className="relative w-52 h-52 sm:w-60 sm:h-60 rounded-full overflow-hidden border-2 border-cyan-400 profile-parrot-glow bg-[#0a1a20] flex items-center justify-center z-10"
+                >
+                  {hasValidPhoto ? (
+                    <img
+                      src={profilePhoto.src}
+                      alt={PROFILE_DATA.name}
+                      onError={() => setImgLoadError(true)}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full transition-transform duration-300"
+                      style={{
+                        objectFit: profilePhoto.objectFit,
+                        objectPosition: `${profilePhoto.posX}% ${profilePhoto.posY}%`,
+                        transform: `scale(${profilePhoto.zoom})`
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src="profile.jpg"
+                      alt={PROFILE_DATA.name}
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        if (!target.src.includes('i.postimg.cc')) {
+                          target.src = 'https://i.postimg.cc/QChw3cNG/3751-Habibur-Rahman-Masum.jpg';
+                        }
+                      }}
+                      onClick={() => quickFileInputRef.current?.click()}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 cursor-pointer"
+                    />
+                  )}
+
                   <input
-                    ref={fileInputRef}
+                    ref={quickFileInputRef}
                     type="file"
                     accept="image/*"
-                    onChange={handleAvatarUpload}
+                    onChange={handleQuickFileSelect}
                     className="hidden"
                   />
                 </div>
               </div>
 
-              {/* Availability Status Indicator below Avatar */}
+              {/* Availability Status Indicator */}
               <div className="mt-4 flex items-center gap-2 text-xs font-medium">
                 <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-lime-400" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-400" />
                 </span>
-                <span className={isDark ? 'text-lime-300' : 'text-lime-700 font-semibold'}>
+                <span className={isDark ? 'text-cyan-300' : 'text-cyan-700 font-semibold'}>
                   {PROFILE_DATA.availability}
                 </span>
                 <span className={isDark ? 'text-slate-600' : 'text-slate-400'} aria-hidden="true">
@@ -139,32 +176,35 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </div>
             </div>
 
-            {/* Right Column: Name, Role ("Video Editor & Graphic Designer"), Bio & Actions */}
+            {/* Right Column: Colorized Name, Role ("Video Editor & Graphic Designer"), Bio & Actions */}
             <div className="lg:col-span-8 text-center lg:text-left space-y-5">
               <div className="space-y-2">
                 <p
                   className={`text-xs font-mono-tabular tracking-wider uppercase ${
-                    isDark ? 'text-lime-400' : 'text-lime-700 font-semibold'
+                    isDark ? 'text-cyan-400' : 'text-cyan-700 font-semibold'
                   }`}
                 >
                   Creative Portfolio · Visual Storytelling & Motion
                 </p>
 
+                {/* Colorized Main Name ("Habibur Rahman Masum") matching Profile Backdrop Tone */}
                 <h1
-                  className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1]"
+                  className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.12]"
                   style={{ textWrap: 'balance' }}
                 >
-                  <span className={isDark ? 'text-white' : 'text-slate-900'}>
+                  <span
+                    className={
+                      isDark ? 'name-colorized-dark' : 'name-colorized-light'
+                    }
+                  >
                     {PROFILE_DATA.name}
                   </span>
                 </h1>
 
-                {/* Role directly below Name as requested: "Video Editor & Graphic Designer" */}
+                {/* Role directly below Name: "Video Editor & Graphic Designer" */}
                 <p
                   className={`font-display text-lg sm:text-xl font-bold ${
-                    isDark
-                      ? 'bg-gradient-to-r from-lime-300 via-lime-400 to-emerald-300 bg-clip-text text-transparent'
-                      : 'text-lime-700'
+                    isDark ? 'text-slate-200' : 'text-cyan-800'
                   }`}
                 >
                   {PROFILE_DATA.role}
@@ -180,7 +220,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 {PROFILE_DATA.shortGreeting}
               </p>
 
-              {/* Clean Unboxed Metadata for Core Disciplines (Zero-Pill Discipline) */}
+              {/* Clean Unboxed Metadata for Core Disciplines */}
               <div
                 className={`flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-1 text-xs font-medium ${
                   isDark ? 'text-slate-400' : 'text-slate-600'
@@ -188,11 +228,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               >
                 {PROFILE_DATA.coreSkills.map((skill, idx) => (
                   <React.Fragment key={skill}>
-                    <span className={idx === 0 ? (isDark ? 'text-lime-300' : 'text-lime-700 font-semibold') : ''}>
+                    <span
+                      className={
+                        idx === 0
+                          ? isDark
+                            ? 'text-cyan-300'
+                            : 'text-cyan-700 font-semibold'
+                          : ''
+                      }
+                    >
                       {skill}
                     </span>
                     {idx < PROFILE_DATA.coreSkills.length - 1 && (
-                      <span className={isDark ? 'text-lime-500/50' : 'text-slate-400'} aria-hidden="true">
+                      <span className={isDark ? 'text-cyan-500/50' : 'text-slate-400'} aria-hidden="true">
                         ·
                       </span>
                     )}
@@ -203,14 +251,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               {/* Key Performance Metrics */}
               <div
                 className={`grid grid-cols-3 gap-4 pt-3 pb-2 border-y ${
-                  isDark ? 'border-white/[0.07]' : 'border-slate-200'
+                  isDark ? 'border-cyan-300/[0.1]' : 'border-slate-200'
                 }`}
               >
                 {PROFILE_DATA.metrics.map((metric) => (
                   <div key={metric.label} className="text-center lg:text-left">
                     <div
                       className={`font-mono-tabular text-base sm:text-xl font-bold ${
-                        isDark ? 'text-lime-300' : 'text-lime-700'
+                        isDark ? 'text-cyan-300' : 'text-cyan-700'
                       }`}
                     >
                       {metric.value}
@@ -222,12 +270,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 ))}
               </div>
 
-              {/* Action Buttons (NO Email here as requested — Email is only in the bottom Contact section) */}
+              {/* Action Buttons (NO Email here — Email is only in bottom Contact section) */}
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1">
                 <button
                   type="button"
                   onClick={scrollToFeaturedAndPlay}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-lime-400 text-slate-950 hover:bg-lime-300 transition-all shadow-lg shadow-lime-400/20 whitespace-nowrap cursor-pointer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-cyan-400 text-slate-950 hover:bg-cyan-300 transition-all shadow-lg shadow-cyan-400/20 whitespace-nowrap cursor-pointer"
                 >
                   <Play className="w-4 h-4 fill-slate-950" />
                   <span>Watch Main Video Below</span>
@@ -239,8 +287,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   rel="noopener noreferrer"
                   className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border transition-colors whitespace-nowrap ${
                     isDark
-                      ? 'border-lime-400/40 bg-lime-400/10 text-lime-300 hover:bg-lime-400/20'
-                      : 'border-lime-600/40 bg-lime-50 text-lime-800 hover:bg-lime-100'
+                      ? 'border-cyan-400/40 bg-cyan-400/10 text-cyan-300 hover:bg-cyan-400/20'
+                      : 'border-cyan-600/40 bg-cyan-50 text-cyan-800 hover:bg-cyan-100'
                   }`}
                 >
                   <MessageCircle className="w-4 h-4" />
@@ -252,11 +300,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   onClick={onOpenWhatsAppModal}
                   className={`inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-medium border transition-colors whitespace-nowrap cursor-pointer ${
                     isDark
-                      ? 'border-white/10 bg-white/[0.03] text-slate-300 hover:border-lime-400/40 hover:text-lime-300'
+                      ? 'border-cyan-300/15 bg-white/[0.03] text-slate-300 hover:border-cyan-400/40 hover:text-cyan-300'
                       : 'border-slate-300 bg-slate-100 text-slate-700 hover:border-slate-400'
                   }`}
                 >
-                  <Settings2 className="w-3.5 h-3.5 text-lime-400" />
+                  <Settings2 className="w-3.5 h-3.5 text-cyan-400" />
                   <span>{whatsappConfigured ? 'Update WhatsApp' : 'Connect My WhatsApp'}</span>
                 </button>
 
@@ -265,11 +313,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   onClick={onOpenVideoModal}
                   className={`inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-medium border transition-colors whitespace-nowrap cursor-pointer ${
                     isDark
-                      ? 'border-white/10 bg-white/[0.03] text-slate-300 hover:border-lime-400/40 hover:text-lime-300'
+                      ? 'border-cyan-300/15 bg-white/[0.03] text-slate-300 hover:border-cyan-400/40 hover:text-cyan-300'
                       : 'border-slate-300 bg-slate-100 text-slate-700 hover:border-slate-400'
                   }`}
                 >
-                  <Video className="w-3.5 h-3.5 text-lime-400" />
+                  <Video className="w-3.5 h-3.5 text-cyan-400" />
                   <span>Add My Videos</span>
                 </button>
               </div>
@@ -277,13 +325,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
         </div>
 
-        {/* PART 2 (RIGHT BELOW PROFILE): FEATURED VIDEO EDIT IN 16:9 CINEMA CONTAINER */}
-        <div id="featured-video-player" className="space-y-4">
+        {/* PART 2 (RIGHT BELOW PROFILE): FEATURED VIDEO EDIT IN BALANCED 16:9 CINEMA CONTAINER */}
+        <div id="featured-video-player" className="max-w-4xl mx-auto space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
             <div>
               <div
                 className={`flex items-center gap-2 text-xs font-mono-tabular ${
-                  isDark ? 'text-lime-400' : 'text-lime-700 font-semibold'
+                  isDark ? 'text-cyan-400' : 'text-cyan-700 font-semibold'
                 }`}
               >
                 <span>Featured Video Edit</span>
@@ -302,10 +350,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 type="button"
                 onClick={onOpenVideoModal}
                 className={`inline-flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap ${
-                  isDark ? 'text-slate-400 hover:text-lime-300' : 'text-slate-600 hover:text-lime-700'
+                  isDark ? 'text-slate-400 hover:text-cyan-300' : 'text-slate-600 hover:text-cyan-700'
                 }`}
               >
-                <Video className="w-3.5 h-3.5 text-lime-400" />
+                <Video className="w-3.5 h-3.5 text-cyan-400" />
                 <span>Change Featured Video</span>
               </button>
 
@@ -314,7 +362,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`inline-flex items-center gap-1 transition-colors whitespace-nowrap ${
-                  isDark ? 'text-lime-300 hover:text-lime-200' : 'text-lime-700 hover:text-lime-800'
+                  isDark ? 'text-cyan-300 hover:text-cyan-200' : 'text-cyan-700 hover:text-cyan-800'
                 }`}
               >
                 <span>Watch on YouTube</span>
@@ -327,7 +375,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <div
             className={`relative w-full aspect-video rounded-2xl overflow-hidden border transition-all ${
               isDark
-                ? 'bg-[#090d0e] border-lime-400/30 shadow-[0_20px_70px_-15px_rgba(163,230,53,0.18)]'
+                ? 'bg-[#071116] border-cyan-400/35 shadow-[0_20px_70px_-15px_rgba(60,128,145,0.35)]'
                 : 'bg-slate-900 border-slate-300 shadow-xl'
             }`}
           >
@@ -365,9 +413,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 {/* Measured Dark Scrim for Contrast */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/20 transition-opacity group-hover:opacity-90" />
 
-                {/* Center Neon Parrot Play Trigger */}
+                {/* Center Neon Cyan Play Trigger */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-lime-400 text-slate-950 flex items-center justify-center shadow-[0_0_40px_rgba(163,230,53,0.75)] transition-transform duration-200 group-hover:scale-110">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-cyan-400 text-slate-950 flex items-center justify-center shadow-[0_0_40px_rgba(34,211,238,0.75)] transition-transform duration-200 group-hover:scale-110">
                     <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-slate-950 ml-1" />
                   </div>
                   <span className="mt-3 text-xs sm:text-sm font-semibold text-white tracking-wide bg-black/60 backdrop-blur-md px-3.5 py-1 rounded-md border border-white/15">
@@ -378,14 +426,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 {/* Bottom Overlay Info Bar */}
                 <div className="absolute bottom-0 inset-x-0 p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-white">
                   <div>
-                    <p className="text-xs text-lime-300 font-mono-tabular">
+                    <p className="text-xs text-cyan-300 font-mono-tabular">
                       {featuredVideo.category} · {featuredVideo.metrics || 'High-Retention Edit'}
                     </p>
                     <p className="text-sm sm:text-base font-semibold line-clamp-1">
                       {featuredVideo.description}
                     </p>
                   </div>
-                  <span className="inline-flex items-center gap-1 text-xs font-medium text-lime-300 shrink-0">
+                  <span className="inline-flex items-center gap-1 text-xs font-medium text-cyan-300 shrink-0">
                     <span>Play Inline</span>
                     <ArrowDownRight className="w-3.5 h-3.5" />
                   </span>
