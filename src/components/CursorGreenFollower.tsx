@@ -1,0 +1,111 @@
+import React, { useEffect, useState } from 'react';
+
+interface CursorGreenFollowerProps {
+  isDark: boolean;
+}
+
+export const CursorGreenFollower: React.FC<CursorGreenFollowerProps> = ({ isDark }) => {
+  const [position, setPosition] = useState({ x: -200, y: -200 });
+  const [ringPosition, setRingPosition] = useState({ x: -200, y: -200 });
+  const [isHoveringInteractive, setIsHoveringInteractive] = useState(false);
+  const [isClicking, setIsClicking] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) return;
+
+    let animationFrameId: number;
+    let targetX = -200;
+    let targetY = -200;
+    let currentRingX = -200;
+    let currentRingY = -200;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      setPosition({ x: targetX, y: targetY });
+      if (!isVisible) setIsVisible(true);
+
+      const target = e.target as HTMLElement | null;
+      const interactive = target?.closest('a, button, input, textarea, select, [role="button"]');
+      setIsHoveringInteractive(Boolean(interactive));
+    };
+
+    const handleMouseDown = () => setIsClicking(true);
+    const handleMouseUp = () => setIsClicking(false);
+    const handleMouseLeave = () => setIsVisible(false);
+
+    const smoothFollow = () => {
+      currentRingX += (targetX - currentRingX) * 0.18;
+      currentRingY += (targetY - currentRingY) * 0.18;
+      setRingPosition({ x: currentRingX, y: currentRingY });
+      animationFrameId = requestAnimationFrame(smoothFollow);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    animationFrameId = requestAnimationFrame(smoothFollow);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [isVisible]);
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="pointer-events-none fixed inset-0 z-50 hidden lg:block overflow-hidden" aria-hidden="true">
+      {/* Soft Parrot Green Ambient Spotlight following cursor */}
+      <div
+        className="fixed rounded-full transition-opacity duration-300"
+        style={{
+          width: '440px',
+          height: '440px',
+          transform: `translate3d(${ringPosition.x - 220}px, ${ringPosition.y - 220}px, 0)`,
+          background: isDark
+            ? 'radial-gradient(circle, rgba(163, 230, 53, 0.13) 0%, rgba(132, 204, 22, 0.05) 42%, transparent 70%)'
+            : 'radial-gradient(circle, rgba(132, 204, 22, 0.12) 0%, rgba(163, 230, 53, 0.04) 42%, transparent 70%)'
+        }}
+      />
+
+      {/* Outer Parrot Green Tracking Ring */}
+      <div
+        className="fixed rounded-full border transition-transform duration-150 ease-out"
+        style={{
+          width: isHoveringInteractive ? '44px' : '28px',
+          height: isHoveringInteractive ? '44px' : '28px',
+          borderColor: isHoveringInteractive
+            ? 'rgba(190, 242, 100, 0.9)'
+            : 'rgba(163, 230, 53, 0.55)',
+          backgroundColor: isHoveringInteractive
+            ? 'rgba(163, 230, 53, 0.1)'
+            : 'transparent',
+          boxShadow: isHoveringInteractive
+            ? '0 0 20px rgba(163, 230, 53, 0.45)'
+            : '0 0 10px rgba(163, 230, 53, 0.25)',
+          transform: `translate3d(${ringPosition.x - (isHoveringInteractive ? 22 : 14)}px, ${
+            ringPosition.y - (isHoveringInteractive ? 22 : 14)
+          }px, 0) scale(${isClicking ? 0.85 : 1})`
+        }}
+      />
+
+      {/* Crisp Neon Parrot Dot */}
+      <div
+        className="fixed rounded-full bg-lime-400"
+        style={{
+          width: '7px',
+          height: '7px',
+          boxShadow: '0 0 12px rgba(190, 242, 100, 0.95)',
+          transform: `translate3d(${position.x - 3.5}px, ${position.y - 3.5}px, 0)`
+        }}
+      />
+    </div>
+  );
+};

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habibur Rahman Masum — Video Editor & Graphic Designer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Syne', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    @keyframes parrotPulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 18px rgba(163, 230, 53, 0.55), 0 0 38px rgba(132, 204, 22, 0.32);
+        border-color: rgba(163, 230, 53, 0.9);
+      }
+      50% {
+        box-shadow: 0 0 28px rgba(190, 242, 100, 0.85), 0 0 56px rgba(163, 230, 53, 0.48);
+        border-color: rgba(217, 249, 157, 1);
+      }
+    }
+    .profile-parrot-glow {
+      animation: parrotPulseGlow 3.2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-[#060809] text-[#f4f6f0] transition-colors duration-300">
+  <!-- Header -->
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-[#060809]/85 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="#top" class="font-display font-bold text-lg hover:text-lime-400">Habibur Rahman Masum</a>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-300">
+        <a href="#videos" class="hover:text-lime-400">Video Edits</a>
+        <a href="#reels" class="hover:text-lime-400">Shorts & Reels</a>
+        <a href="#graphics" class="hover:text-lime-400">Graphic Design</a>
+        <a href="#about" class="hover:text-lime-400">About</a>
+        <a href="#contact" class="hover:text-lime-400">Contact</a>
+      </nav>
+      <a href="#contact" class="px-4 py-2 rounded-lg text-xs font-bold bg-lime-400 text-slate-950">Get in Touch</a>
+    </div>
+  </header>
+
+  <main id="top" class="max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-20">
+    <!-- 1. Hero Section: Profile Card First, Featured 16:9 Video Below -->
+    <section class="space-y-12">
+      <div class="rounded-2xl p-6 sm:p-10 border border-white/10 bg-[#0b0f10] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-4 flex flex-col items-center lg:items-start">
+          <div class="w-52 h-52 rounded-2xl overflow-hidden border-2 border-lime-400 profile-parrot-glow bg-slate-900">
+            <img src="profile.jpg" onerror="this.src='https://postimg.cc/DJpBQJbB'" alt="Habibur Rahman Masum" class="w-full h-full object-cover" />
+          </div>
+          <p class="mt-3 text-xs text-lime-300 font-mono">● Available for Projects · Remote Worldwide</p>
+        </div>
+        <div class="lg:col-span-8 space-y-4 text-center lg:text-left">
+          <h1 class="font-display text-3xl sm:text-5xl font-extrabold">Habibur Rahman Masum</h1>
+          <p class="font-display text-xl font-bold text-lime-400">Video Editor & Graphic Designer</p>
+          <p class="text-sm sm:text-base text-slate-300 max-w-2xl">
+            Hi, I'm Habibur Rahman Masum — a dedicated Video Editor & Graphic Designer focused on sharp pacing, clean motion graphics, immersive sound design, and high-impact poster visuals.
+          </p>
+          <div class="flex flex-wrap justify-center lg:justify-start gap-3 pt-2">
+            <a href="#featured-video" class="px-5 py-2.5 rounded-xl bg-lime-400 text-slate-950 font-bold text-xs sm:text-sm">Watch Main Video Below</a>
+            <a href="#contact" class="px-5 py-2.5 rounded-xl border border-lime-400/40 text-lime-300 font-semibold text-xs sm:text-sm">WhatsApp & Contact</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured 16:9 Video Right Below Profile -->
+      <div id="featured-video" class="space-y-3">
+        <div class="text-xs font-mono text-lime-400">Featured Video Edit · 16:9 Widescreen Cinema</div>
+        <div class="w-full aspect-video rounded-2xl overflow-hidden border border-lime-400/30 bg-black shadow-2xl">
+          <iframe
+            class="w-full h-full border-0"
+            src="https://www.youtube.com/embed/pRiaoBN6bPU?rel=0&modestbranding=1"
+            title="Featured Video Edit — Habibur Rahman Masum"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Video Edits Section (All 5 Horizontal Videos in 16:9 Widescreen Video Frames) -->
+    <section id="videos" class="space-y-8 pt-8 border-t border-white/10">
+      <div>
+        <p class="text-xs font-mono text-lime-400">01. Selected Video Edits · 16:9 Widescreen Format</p>
+        <h2 class="font-display text-3xl font-extrabold mt-1">Video Edits & Motion Showcase</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article class="rounded-2xl overflow-hidden border border-white/10 bg-[#0b0f10]">
+          <div class="w-full aspect-video bg-black">
+            <iframe class="w-full h-full border-0" src="https://www.youtube.com/embed/pRiaoBN6bPU?rel=0&modestbranding=1" title="Main Showreel" allowfullscreen></iframe>
+          </div>
+          <div class="p-5 space-y-1">
+            <div class="text-xs font-mono text-lime-400">01 · Motion & Showreel · 16:9</div>
+            <h3 class="text-lg font-bold">Main Showreel & Visual Storytelling Edit</h3>
+          </div>
+        </article>
+        <article class="rounded-2xl overflow-hidden border border-white/10 bg-[#0b0f10]">
+          <div class="w-full aspect-video bg-black">
+            <iframe class="w-full h-full border-0" src="https://www.youtube.com/embed/IROjS6laW2Y?rel=0&modestbranding=1" title="Carousel Animation" allowfullscreen></iframe>
+          </div>
+          <div class="p-5 space-y-1">
+            <div class="text-xs font-mono text-lime-400">02 · Motion & Animation · 16:9</div>
+            <h3 class="text-lg font-bold">Carousel Animation — Kinetic Motion Flow</h3>
+          </div>
+        </article>
+        <article class="rounded-2xl overflow-hidden border border-white/10 bg-[#0b0f10]">
+          <div class="w-full aspect-video bg-black">
+            <iframe class="w-full h-full border-0" src="https://www.youtube.com/embed/KgL51V2d1iE?rel=0&modestbranding=1" title="IU Animation" allowfullscreen></iframe>
+          </div>
+          <div class="p-5 space-y-1">
+            <div class="text-xs font-mono text-lime-400">03 · Motion & Animation · 16:9</div>
+            <h3 class="text-lg font-bold">IU Animation — Visual & Motion Design</h3>
+          </div>
+        </article>
+        <article class="rounded-2xl overflow-hidden border border-white/10 bg-[#0b0f10]">
+          <div class="w-full aspect-video bg-black">
+            <iframe class="w-full h-full border-0" src="https://www.youtube.com/embed/wn4EmjiC5yw?rel=0&modestbranding=1" title="Fluggin Motion Sequence" allowfullscreen></iframe>
+          </div>
+          <div class="p-5 space-y-1">
+            <div class="text-xs font-mono text-lime-400">04 · Motion & Animation · 16:9</div>
+            <h3 class="text-lg font-bold">Fluggin Motion Sequence — Dynamic Animation</h3>
+          </div>
+        </article>
+        <article class="rounded-2xl overflow-hidden border border-white/10 bg-[#0b0f10]">
+          <div class="w-full aspect-video bg-black">
+            <iframe class="w-full h-full border-0" src="https://www.youtube.com/embed/bGfWbrdb2-8?rel=0&modestbranding=1" title="Nafees Salim — Creator Edit" allowfullscreen></iframe>
+          </div>
+          <div class="p-5 space-y-1">
+            <div class="text-xs font-mono text-lime-400">05 · Creator & Documentary · 16:9</div>
+            <h3 class="text-lg font-bold">Nafees Salim — Creator & Talking-Head Edit</h3>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3. Shorts & Reels Showcase Section (Dedicated 9:16 Vertical Section Right Below Video Edits) -->
+    <section id="reels" class="space-y-8 pt-8 border-t border-white/10">
+      <div>
+        <p class="text-xs font-mono text-lime-400">02. Shorts & Reels Showcase · Vertical 9:16 Format</p>
+        <h2 class="font-display text-3xl font-extrabold mt-1">Shorts & Reels Showcase</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <article class="rounded-2xl overflow-hidden border border-white/10 bg-[#0b0f10]">
+          <div class="w-full aspect-[9/16] bg-black">
+            <iframe class="w-full h-full border-0" src="https://www.youtube.com/embed/qgyvCVmNUZ0?rel=0&modestbranding=1&playsinline=1" title="Animation — Kinetic Short Reel" allowfullscreen></iframe>
+          </div>
+          <div class="p-4">
+            <div class="text-xs font-mono text-lime-400">01 · Motion Reel · 9:16</div>
+            <h3 class="text-sm font-bold mt-1">Animation — Kinetic Short Reel</h3>
+          </div>
+        </article>
+        <article class="rounded-2xl overflow-hidden border border-white/10 bg-[#0b0f10]">
+          <div class="w-full aspect-[9/16] bg-black">
+            <iframe class="w-full h-full border-0" src="https://www.youtube.com/embed/J67ajfteZaM?rel=0&modestbranding=1&playsinline=1" title="Bap Ka Beta Style Editing" allowfullscreen></iframe>
+          </div>
+          <div class="p-4">
+            <div class="text-xs font-mono text-lime-400">02 · Trend & Viral Edit · 9:16</div>
+            <h3 class="text-sm font-bold mt-1">Bap Ka Beta Style Editing — Viral Short</h3>
+          </div>
+        </article>
+        <article class="rounded-2xl overflow-hidden border border-white/10 bg-[#0b0f10]">
+          <div class="w-full aspect-[9/16] bg-black">
+            <iframe class="w-full h-full border-0" src="https://www.youtube.com/embed/mf4xu1rMmP8?rel=0&modestbranding=1&playsinline=1" title="Ad Promotion — Commercial Short" allowfullscreen></iframe>
+          </div>
+          <div class="p-4">
+            <div class="text-xs font-mono text-lime-400">03 · Commercial Promo · 9:16</div>
+            <h3 class="text-sm font-bold mt-1">Ad Promotion — Commercial Short</h3>
+          </div>
+        </article>
+        <article class="rounded-2xl overflow-hidden border border-white/10 bg-[#0b0f10]">
+          <div class="w-full aspect-[9/16] bg-black">
+            <iframe class="w-full h-full border-0" src="https://www.youtube.com/embed/jW4woWS7Z58?rel=0&modestbranding=1&playsinline=1" title="Reel Editing — High-Retention Social Short" allowfullscreen></iframe>
+          </div>
+          <div class="p-4">
+            <div class="text-xs font-mono text-lime-400">04 · Social Media Reel · 9:16</div>
+            <h3 class="text-sm font-bold mt-1">Reel Editing — High-Retention Social Short</h3>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 4. Graphic & Poster Designs (2 Unique Designs) -->
+    <section id="graphics" class="space-y-8 pt-8 border-t border-white/10">
+      <div>
+        <p class="text-xs font-mono text-lime-400">03. Visual Design & Branding</p>
+        <h2 class="font-display text-3xl font-extrabold mt-1">Graphic & Poster Designs</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="rounded-2xl overflow-hidden border border-white/10 bg-[#0b0f10]">
+          <img src="https://postimg.cc/JDF5Dffw" onerror="this.src='graphic1.jpg'" alt="Air Badr — Commercial Poster Design" class="w-full aspect-[3/4] object-cover" />
+          <div class="p-4">
+            <h3 class="font-bold">Air Badr — Commercial Poster Design</h3>
+            <p class="text-xs text-slate-400">Brand Campaign & Product Poster</p>
+          </div>
+        </div>
+        <div class="rounded-2xl overflow-hidden border border-white/10 bg-[#0b0f10]">
+          <img src="https://postimg.cc/YGPzG55w" onerror="this.src='graphic2.jpg'" alt="Nike Shoes — Dynamic Brand Visual" class="w-full aspect-[3/4] object-cover" />
+          <div class="p-4">
+            <h3 class="font-bold">Nike Shoes — Dynamic Brand Visual</h3>
+            <p class="text-xs text-slate-400">Sports & Footwear Advertising</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. About Me -->
+    <section id="about" class="space-y-4 pt-8 border-t border-white/10">
+      <p class="text-xs font-mono text-lime-400">04. About Me</p>
+      <h2 class="font-display text-3xl font-extrabold">About Habibur Rahman Masum</h2>
+      <blockquote class="p-6 rounded-2xl bg-[#0b0f10] border-l-4 border-lime-400 text-slate-200 leading-relaxed">
+        "I am a passionate video editor dedicated to the art of visual storytelling. Over the past several months, I have immersed myself in learning the ins and outs of editing—practicing daily, refining my pacing, and perfecting my sound design. While I don't claim decades of industry experience, I bring fresh creativity, high-energy dedication, and a modern aesthetic to every frame. Let's create something memorable together."
+      </blockquote>
+    </section>
+
+    <!-- 6. Direct Contact Channels -->
+    <section id="contact" class="space-y-6 pt-8 border-t border-white/10">
+      <p class="text-xs font-mono text-lime-400">05. Get in Touch · Direct Contact Channels</p>
+      <h2 class="font-display text-3xl font-extrabold">Let's Create Something Memorable Together</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <a href="mailto:habiburrahmanmasum132@gmail.com" class="p-4 rounded-2xl border border-white/10 bg-[#0b0f10] hover:border-lime-400">
+          <div class="text-xs font-mono text-lime-400">Direct Email</div>
+          <div class="text-sm font-bold truncate mt-1">habiburrahmanmasum132@gmail.com</div>
+        </a>
+        <a href="https://www.youtube.com/@perfect-zone.studio/videos" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl border border-white/10 bg-[#0b0f10] hover:border-lime-400">
+          <div class="text-xs font-mono text-lime-400">YouTube Channel</div>
+          <div class="text-sm font-bold mt-1">Perfect Zone Studio</div>
+        </a>
+        <a href="https://www.behance.net/habibzone" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl border border-white/10 bg-[#0b0f10] hover:border-lime-400">
+          <div class="text-xs font-mono text-lime-400">Behance Portfolio</div>
+          <div class="text-sm font-bold mt-1">behance.net/habibzone</div>
+        </a>
+        <a href="https://www.facebook.com/masumbinaman.aman/" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl border border-white/10 bg-[#0b0f10] hover:border-lime-400">
+          <div class="text-xs font-mono text-lime-400">Facebook Profile</div>
+          <div class="text-sm font-bold mt-1">Masum Bin Aman</div>
+        </a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Syne', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono-tabular {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Vivid Parrot Green / Electric Lime Glowing Profile Frame */
+@keyframes parrotPulseGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 18px rgba(163, 230, 53, 0.55),
+      0 0 38px rgba(132, 204, 22, 0.32),
+      inset 0 0 14px rgba(190, 242, 100, 0.25);
+    border-color: rgba(163, 230, 53, 0.9);
+  }
+  50% {
+    box-shadow:
+      0 0 28px rgba(190, 242, 100, 0.8),
+      0 0 56px rgba(163, 230, 53, 0.48),
+      inset 0 0 22px rgba(190, 242, 100, 0.35);
+    border-color: rgba(217, 249, 157, 1);
+  }
+}
+
+.profile-parrot-glow {
+  animation: parrotPulseGlow 3.2s ease-in-out infinite;
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-parrot-glow,
+  .animate-marquee {
+    animation: none !important;
+  }
+}
